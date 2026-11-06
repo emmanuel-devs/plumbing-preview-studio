@@ -51,6 +51,12 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+  --color-plum: var(--plum);
+  --color-plum-deep: color-mix(in oklab, var(--plum) 80%, black);
+  --color-plum-foreground: var(--plum-foreground);
+  --color-surface: var(--surface);
+  --font-display: "Archivo", system-ui, sans-serif;
+  --font-body: "Public Sans", system-ui, sans-serif;
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -132,9 +138,117 @@
   --sidebar-ring: oklch(0.551 0.027 264.364);
 }
 
+:root {
+  --plum: oklch(0.2 0.13 300);
+  --plum-soft: oklch(0.28 0.15 300);
+  --plum-foreground: oklch(0.99 0 0);
+  --surface: oklch(0.97 0.004 80);
+  --primary: oklch(0.6 0.24 25);
+  --primary-foreground: oklch(0.99 0 0);
+  --foreground: oklch(0.2 0.03 300);
+  --muted-foreground: oklch(0.47 0.03 300);
+  --border: oklch(0.91 0.01 300);
+  --radius: 0.75rem;
+}
+
+@utility container-site {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 80rem;
+  padding-inline: 1.25rem;
+  @media (min-width: 640px) { padding-inline: 2rem; }
+}
+@utility section {
+  padding-block: 5rem;
+  scroll-margin-top: 4rem;
+  @media (min-width: 1024px) { padding-block: 7.5rem; scroll-margin-top: 5rem; }
+}
+@utility eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--primary);
+  &::before { content: ""; width: 1.75rem; height: 2px; background: var(--primary); }
+}
+@utility eyebrow-light { color: color-mix(in oklab, var(--plum-foreground) 85%, transparent); }
+@utility btn-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  padding: 0.7rem 1.4rem;
+  font-weight: 700;
+  transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+  &:focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }
+  &:hover { transform: translateY(-1px); }
+}
+@utility btn-primary {
+  @apply btn-base;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  box-shadow: 0 10px 24px -10px color-mix(in oklab, var(--primary) 70%, transparent);
+  &:hover { background: color-mix(in oklab, var(--primary) 88%, black); }
+}
+@utility btn-outline-light {
+  @apply btn-base;
+  color: var(--plum-foreground);
+  box-shadow: inset 0 0 0 2px color-mix(in oklab, var(--plum-foreground) 35%, transparent);
+  &:hover { background: color-mix(in oklab, var(--plum-foreground) 10%, transparent); }
+}
+@utility btn-outline-dark {
+  @apply btn-base;
+  color: var(--plum);
+  box-shadow: inset 0 0 0 2px var(--plum);
+  &:hover { background: var(--plum); color: var(--plum-foreground); }
+}
+@utility btn-lg { padding: 1rem 1.75rem; font-size: 1.05rem; }
+@utility shadow-card { box-shadow: 0 20px 50px -25px color-mix(in oklab, var(--plum) 45%, transparent); }
+@utility shadow-deep { box-shadow: 0 40px 80px -30px oklch(0 0 0 / 0.55); }
+@utility service-card {
+  border-radius: 1.5rem;
+  background: var(--background);
+  padding: 2rem;
+  border: 1px solid var(--border);
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  &:hover { transform: translateY(-4px); border-color: transparent; box-shadow: 0 20px 50px -25px color-mix(in oklab, var(--plum) 45%, transparent); }
+}
+@utility link-underline {
+  background: linear-gradient(var(--primary), var(--primary)) no-repeat left bottom / 0 2px;
+  padding-bottom: 2px;
+  transition: background-size 0.25s;
+  &:hover, &:focus-visible { background-size: 100% 2px; }
+}
+@utility hero-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(60% 60% at 85% 20%, color-mix(in oklab, var(--plum-soft) 90%, transparent), transparent 70%),
+    radial-gradient(40% 40% at 0% 100%, color-mix(in oklab, var(--primary) 18%, transparent), transparent 70%);
+}
+
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.is-visible { opacity: 1; transform: none; }
+.faq summary::-webkit-details-marker { display: none; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}
+
 @layer base {
   * {
     border-color: var(--color-border);
+  }
+  a:focus-visible, button:focus-visible, summary:focus-visible {
+    outline: 3px solid var(--ring);
+    outline-offset: 3px;
+    border-radius: 6px;
   }
 
   body {

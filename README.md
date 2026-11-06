@@ -27,3 +27,9 @@ npm run dev
 - TypeScript
 - React
 - Tailwind CSS
+
+## Adding a prospect preview
+1. Open `src/data/businesses.ts` and add a `BusinessConfig` entry with a unique `slug` (spread an existing config to start).
+2. Add it to the `businesses` array.
+3. Visit `/preview/<slug>`. `/` always shows the default sample (Northline). Unknown slugs show a friendly fallback.
+Images go in `src/assets/` and are imported at the top of the data file.

@@ -28,3 +28,4 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+- Each prospect site is a typed entry in src/data/businesses.ts rendered by the shared PlumbingSite component at /preview/$slug; never duplicate pages per business.
