@@ -30,7 +30,9 @@ export const Route = createFileRoute("/preview/$slug")({
 
 function Preview() {
   const { slug } = Route.useLoaderData();
-  return <PlumbingSite b={getBusiness(slug)!} />;
+  const b = getBusiness(slug);
+  if (!b) return <Missing />;
+  return <PlumbingSite key={slug} b={b} />;
 }
 
 function Missing() {

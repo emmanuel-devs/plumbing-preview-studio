@@ -29,3 +29,5 @@ use the editor.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
 - Each prospect site is a typed entry in src/data/businesses.ts rendered by the shared PlumbingSite component at /preview/$slug; never duplicate pages per business.
+- Shared motion uses scoped IntersectionObserver and finite Web Animations with visible-by-default CSS, so every tenant inherits animation without hidden-content fallbacks or extra libraries.
+- FAQ uses native details with measured-height enhancement; mobile navigation uses CSS grid transitions and inert closed content to preserve keyboard accessibility.
