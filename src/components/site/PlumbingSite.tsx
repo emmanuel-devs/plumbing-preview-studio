@@ -119,6 +119,11 @@ export function PlumbingSite({ b }: { b: BusinessConfig }) {
             </ul>
             </div>
           </nav>
+          <noscript>
+            <nav aria-label="Mobile fallback" className="container-site grid grid-cols-2 gap-3 py-4 lg:hidden">
+              {NAV.map((n) => <a key={n.id} className="text-plum font-semibold" href={`#${n.id}`}>{n.label}</a>)}
+            </nav>
+          </noscript>
       </header>
 
       <main id="main">
@@ -155,7 +160,7 @@ export function PlumbingSite({ b }: { b: BusinessConfig }) {
         <section aria-label="Company highlights" className="bg-primary text-primary-foreground">
           <ul className="container-site grid grid-cols-1 gap-4 py-6 sm:grid-cols-2 lg:grid-cols-4">
             {b.highlights.map((h) => (
-              <li key={h} className="flex items-center gap-3 font-semibold"><Icon name="check" className="size-5 shrink-0" />{h}</li>
+              <li key={h} className="reveal flex items-center gap-3 font-semibold"><Icon name="check" className="size-5 shrink-0" />{h}</li>
             ))}
           </ul>
         </section>
@@ -267,7 +272,7 @@ export function PlumbingSite({ b }: { b: BusinessConfig }) {
               <p className="eyebrow">FAQ</p>
               <h2 id="faq" className="mt-3 font-display text-3xl font-extrabold tracking-tight text-plum sm:text-4xl lg:text-5xl">Common questions</h2>
             </div>
-            <div className="mt-10 divide-y divide-border rounded-3xl border border-border">
+            <div className="reveal mt-10 divide-y divide-border rounded-3xl border border-border">
               {b.faqs.map((f) => (
                 <MotionFaq key={f.q} question={f.q} answer={f.a} icon={<Icon name="plus" className="size-5 shrink-0 text-primary transition-transform group-open:rotate-45" />} />
               ))}
@@ -278,7 +283,7 @@ export function PlumbingSite({ b }: { b: BusinessConfig }) {
         {/* Contact */}
         <section id="contact" className="section bg-plum text-plum-foreground">
           <div className="container-site grid gap-12 lg:grid-cols-2">
-            <div>
+            <div className="reveal">
               <p className="eyebrow eyebrow-light">Contact</p>
               <h2 className="mt-3 font-display text-3xl font-extrabold leading-[1.05] tracking-tight sm:text-4xl lg:text-5xl">Tell us what's happening</h2>
               <p className="mt-5 max-w-md text-lg text-plum-foreground/80">Email a short description (photos help) or call. We'll come back with next steps and a clear estimate.</p>
@@ -293,7 +298,7 @@ export function PlumbingSite({ b }: { b: BusinessConfig }) {
                 { icon: "mail" as const, label: "Email", value: b.email, href: `mailto:${b.email}` },
                 { icon: "pin" as const, label: "Address", value: b.address },
               ].map((c) => (
-                <li key={c.label} className="flex items-center gap-4 rounded-2xl bg-plum-foreground/5 p-5 ring-1 ring-plum-foreground/15">
+                <li key={c.label} className="reveal flex items-center gap-4 rounded-2xl bg-plum-foreground/5 p-5 ring-1 ring-plum-foreground/15">
                   <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-primary text-primary-foreground"><Icon name={c.icon} className="size-5" /></span>
                   <div>
                     <p className="text-sm text-plum-foreground/65">{c.label}</p>
@@ -308,7 +313,7 @@ export function PlumbingSite({ b }: { b: BusinessConfig }) {
       </main>
 
       <footer className="bg-plum-deep text-plum-foreground">
-        <div className="container-site grid gap-10 py-14 md:grid-cols-3">
+        <div className="reveal container-site grid gap-10 py-14 md:grid-cols-3">
           <div>
             <Wordmark light />
             <p className="mt-4 max-w-xs text-sm text-plum-foreground/65">{b.footer.tagline}</p>

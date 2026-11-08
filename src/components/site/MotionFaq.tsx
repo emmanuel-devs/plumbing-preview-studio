@@ -8,6 +8,7 @@ export function MotionFaq({ question, answer, icon }: { question: string; answer
   useEffect(() => {
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
     const settle = () => {
+      if (!animation.current) return;
       animation.current?.cancel();
       animation.current = null;
       if (details.current) {

@@ -1,3 +1,3 @@
 - [x] Complete shared motion, hero, cards, gallery, menu, FAQ, and CTA interactions.
-- [x] Verify root and both tenant pages, mobile navigation, reduced motion, and no-JS visibility.
-- [x] Run relevant tests and inspect preview diagnostics.
+- [x] Reverify root and every tenant page, mobile navigation, reduced motion, and no-JS visibility.
+- [x] Run relevant tests and inspect preview diagnostics after finishing remaining section reveals.

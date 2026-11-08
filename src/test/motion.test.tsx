@@ -49,4 +49,20 @@ describe("Shared motion constraints", () => {
     fireEvent.click(getByText("Quote?"));
     expect(container.querySelector("details")?.open).toBe(false);
   });
+  it("preserves native FAQ state when the motion preference changes without an active animation", () => {
+    let preferenceChange: (() => void) | undefined;
+    vi.spyOn(window, "matchMedia").mockImplementation((query) => ({
+      matches: false, media: query, onchange: null, addListener: vi.fn(), removeListener: vi.fn(),
+      addEventListener: (_type: string, listener: EventListenerOrEventListenerObject) => {
+        if (typeof listener === "function") preferenceChange = () => listener(new Event("change"));
+      },
+      removeEventListener: vi.fn(), dispatchEvent: vi.fn(),
+    }));
+    const { container } = render(<MotionFaq question="Quote?" answer="Call us." icon={<span>+</span>} />);
+    const details = container.querySelector("details");
+    if (!details) throw new Error("Missing native disclosure");
+    details.open = true;
+    preferenceChange?.();
+    expect(details.open).toBe(true);
+  });
 });

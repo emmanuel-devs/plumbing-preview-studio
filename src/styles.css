@@ -234,6 +234,8 @@
 /* Content is always visible in CSS. Finite WAAPI animations are progressive enhancement. */
 :root {
   --motion-ease: cubic-bezier(.22, 1, .36, 1);
+}
+.plumbing-site {
   --gallery-shade: color-mix(in oklab, var(--plum) 48%, transparent);
   --motion-card-shadow: 0 24px 50px -25px color-mix(in oklab, var(--plum) 45%, transparent);
 }
@@ -277,7 +279,7 @@ html { scroll-behavior: smooth; }
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
   .plumbing-site *, .plumbing-site *::before, .plumbing-site *::after { translate: none !important; transform: none !important; }
-  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; transition-delay: 0ms !important; animation-duration: 0.01ms !important; animation-delay: 0ms !important; }
 }
 
 @layer base {
