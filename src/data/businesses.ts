@@ -2,6 +2,8 @@ import heroPlumber from "@/assets/hero-plumber.jpg";
 import aboutPlumber from "@/assets/about-plumber.jpg";
 import galleryBathroom from "@/assets/gallery-bathroom.jpg";
 import galleryPipes from "@/assets/gallery-pipes.jpg";
+import galleryBasin from "@/assets/gallery-basin.jpg";
+import galleryRadiator from "@/assets/gallery-radiator.jpg";
 
 export type ServiceIcon = "leak" | "drain" | "heater" | "fixture" | "pipe" | "urgent";
 
@@ -109,6 +111,8 @@ const northline: BusinessConfig = {
     { image: galleryPipes, caption: "Supply line & valve work" },
     { image: aboutPlumber, caption: "Water heater service" },
     { image: heroPlumber, caption: "Under-sink drain repair" },
+    { image: galleryBasin, caption: "Basin & tap installation" },
+    { image: galleryRadiator, caption: "Radiator valve fitting" },
   ],
   serviceAreas: ["Riverton", "Oak Hollow", "Millbrook", "East Harbor", "Cedar Park", "Westfield", "Lakeview", "Stonebridge"],
   faqs: [

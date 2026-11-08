@@ -238,10 +238,10 @@ export function PlumbingSite({ b }: { b: BusinessConfig }) {
               <h2 id="gallery" className="mt-3 font-display text-3xl font-extrabold leading-[1.05] tracking-tight text-plum sm:text-4xl lg:text-5xl">The kind of work we do</h2>
               <p className="mt-4 text-muted-foreground">Representative images for illustration — replace with your own project photos.</p>
             </div>
-            <ul className="mt-12 grid gap-5 md:grid-cols-4 md:grid-rows-2">
-              {b.gallery.map((g, i) => (
-                <li key={g.caption} className={`reveal gallery-item group relative overflow-hidden rounded-3xl ${i === 0 ? "md:col-span-2 md:row-span-2" : i === 3 ? "md:col-span-2" : ""}`}>
-                  <img src={g.image} alt={g.caption} loading="lazy" className="h-full min-h-60 w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <ul className="gallery-mosaic mt-12">
+              {b.gallery.map((g) => (
+                <li key={g.caption} className="reveal gallery-item relative overflow-hidden rounded-3xl">
+                  <img src={g.image} alt={g.caption} loading="lazy" className="gallery-photo" />
                   <span className="gallery-overlay absolute inset-0" aria-hidden="true" />
                   <span className="gallery-caption absolute bottom-4 left-4 rounded-full bg-background/95 px-4 py-2 text-sm font-semibold text-plum">{g.caption}</span>
                 </li>
