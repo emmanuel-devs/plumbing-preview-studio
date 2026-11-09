@@ -296,6 +296,7 @@
     aspect-ratio: 4 / 3;
   }
   .gallery-mosaic .gallery-item { aspect-ratio: auto; grid-column: auto; grid-row: auto; }
+  .gallery-mosaic .gallery-item:nth-child(n) { aspect-ratio: auto; }
   .gallery-mosaic .gallery-item:nth-child(1) { grid-area: 1 / 1 / 3 / 3; }
   .gallery-mosaic .gallery-item:nth-child(2) { grid-area: 1 / 3 / 2 / 5; }
   .gallery-mosaic .gallery-item:nth-child(3) { grid-area: 2 / 3 / 4 / 4; }

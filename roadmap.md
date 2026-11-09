@@ -1,4 +1,5 @@
 - [x] Complete shared motion, hero, cards, gallery, menu, FAQ, and CTA interactions.
 - [x] Reverify root and every tenant page, mobile navigation, reduced motion, and no-JS visibility.
 - [x] Run relevant tests and inspect preview diagnostics after finishing remaining section reveals.
-- [ ] Redesign only the configurable gallery as a six-tile mosaic and verify desktop/mobile tenant layouts.
+- [x] Redesign only the configurable gallery as a six-tile mosaic and verify desktop/mobile tenant layouts.
+- [x] Fix the desktop mosaic gap caused by a retained tile aspect ratio; verify root and tenant layouts.
