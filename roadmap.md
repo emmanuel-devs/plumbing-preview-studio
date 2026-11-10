@@ -2,4 +2,4 @@
 - [x] Reverify root and every tenant page, mobile navigation, reduced motion, and no-JS visibility.
 - [x] Run relevant tests and inspect preview diagnostics after finishing remaining section reveals.
 - [x] Redesign only the configurable gallery as a six-tile mosaic and verify desktop/mobile tenant layouts.
-- [x] Fix the desktop mosaic gap caused by a retained tile aspect ratio; verify root and tenant layouts.
+- [x] Fix the desktop mosaic gap caused by a retained tile aspect ratio; verify root and tenant layouts.- [ ] Multi-page tenant system: services, service detail, about, work, contact pages under /preview/:slug with tenant-aware nav, SEO, 404s.

@@ -7,6 +7,21 @@ import galleryRadiator from "@/assets/gallery-radiator.jpg";
 
 export type ServiceIcon = "leak" | "drain" | "heater" | "fixture" | "pipe" | "urgent";
 
+export type PageKey = "home" | "services" | "about" | "work" | "contact";
+
+export interface Service {
+  /** URL segment, unique within one business. */
+  slug: string;
+  icon: ServiceIcon;
+  title: string;
+  /** Short card summary. */
+  body: string;
+  detail?: { intro: string; included: string[]; signs?: string[] };
+  image?: string;
+  imageAlt?: string;
+  faqs?: { q: string; a: string }[];
+}
+
 export interface BusinessConfig {
   slug: string;
   name: string;
@@ -19,7 +34,15 @@ export interface BusinessConfig {
   city: string; // used in location-aware headline
   /** Brand colors as any valid CSS color (oklch/hex). */
   colors: { brand: string; brandDeep: string; accent: string };
-  seo: { title: string; description: string };
+  /** True for demo/fictional brands: shows a sample notice, keeps noindex and skips structured data. */
+  isSample: boolean;
+  seo: { title: string; description: string; pages?: Partial<Record<PageKey, { title?: string; description?: string }>> };
+  /** Verified facts only. Leave undefined when unknown — nothing is shown or claimed. */
+  facts?: { licenseNumber?: string; insured?: boolean; foundedYear?: number };
+  /** Opening hours. Omit when unknown; pages then say "Contact for hours". */
+  hours?: { days: string; time: string }[];
+  /** Real form endpoint. Without one, contact uses email/phone only. */
+  form?: { endpoint: string };
   hero: {
     eyebrow: string;
     headline: string;
@@ -38,14 +61,13 @@ export interface BusinessConfig {
     imageAlt: string;
     principles: { title: string; body: string }[];
   };
-  services: { icon: ServiceIcon; title: string; body: string }[];
+  services: Service[];
   steps: { title: string; body: string }[];
-  gallery: { image: string; caption: string }[];
+  gallery: { image: string; caption: string; alt?: string }[];
   serviceAreas: string[];
   faqs: { q: string; a: string }[];
   footer: {
     tagline: string;
-    hours: string;
     socials: { label: "Facebook" | "Instagram" | "LinkedIn"; href: string }[];
   };
 }
@@ -60,6 +82,8 @@ const northline: BusinessConfig = {
   address: "100 Sample Street, Riverton",
   city: "Riverton",
   colors: { brand: "#2d0a5e", brandDeep: "#210047", accent: "#F01426" },
+  isSample: true,
+  hours: [{ days: "Mon–Fri", time: "8:00–17:00 (sample hours)" }],
   seo: {
     title: "Northline Plumbing Co. — Sample plumbing website template",
     description:
@@ -94,12 +118,63 @@ const northline: BusinessConfig = {
     ],
   },
   services: [
-    { icon: "leak", title: "Leak detection & repair", body: "Track down hidden leaks and repair them before they cause bigger damage." },
-    { icon: "drain", title: "Drain cleaning", body: "Clear slow or blocked sinks, showers, toilets and main lines." },
-    { icon: "heater", title: "Water heater service", body: "Repair, maintenance and replacement for tank and tankless units." },
-    { icon: "fixture", title: "Fixture installation", body: "Faucets, toilets, showers, disposals and more — fitted neatly." },
-    { icon: "pipe", title: "Pipe repair", body: "Fix damaged, corroded or noisy pipes and replace sections as needed." },
-    { icon: "urgent", title: "Emergency plumbing", body: "Burst pipe or major leak? Call us and we'll tell you how soon we can help." },
+    {
+      slug: "leak-detection-repair", icon: "leak", title: "Leak detection & repair",
+      body: "Track down hidden leaks and repair them before they cause bigger damage.",
+      detail: {
+        intro: "Small leaks can quietly damage floors, walls and cabinets. We locate the source, explain what we found and repair it properly.",
+        included: ["Inspection of visible pipework, fixtures and connections", "Locating the source of the leak", "Repair or replacement of the affected section", "A clear explanation of the work before it starts"],
+        signs: ["Unexplained rise in water use", "Damp patches or staining", "Sound of running water when taps are off"],
+      },
+      image: galleryPipes, imageAlt: "Close-up of supply pipes and shut-off valves",
+      faqs: [{ q: "Can you find a leak I can't see?", a: "Often, yes. Describe the symptoms when you get in touch and we'll explain how we'd approach finding it." }],
+    },
+    {
+      slug: "drain-cleaning", icon: "drain", title: "Drain cleaning",
+      body: "Clear slow or blocked sinks, showers, toilets and main lines.",
+      detail: {
+        intro: "Slow drains usually get worse over time. We clear the blockage and tell you what likely caused it so it's less likely to return.",
+        included: ["Sinks, showers, baths and toilets", "Main line blockages", "Advice on preventing repeat clogs"],
+        signs: ["Water draining slowly", "Gurgling sounds", "Unpleasant smells from drains"],
+      },
+      image: heroPlumber, imageAlt: "Plumber working on a drain fitting under a sink",
+    },
+    {
+      slug: "water-heater-service", icon: "heater", title: "Water heater service",
+      body: "Repair, maintenance and replacement for tank and tankless units.",
+      detail: {
+        intro: "No hot water, strange noises or leaks around the tank? We'll assess the unit and explain whether repair or replacement makes more sense.",
+        included: ["Diagnosis of tank and tankless units", "Repairs and part replacement", "Replacement and installation", "Routine maintenance"],
+      },
+      image: aboutPlumber, imageAlt: "Plumber inspecting a water heater",
+    },
+    {
+      slug: "fixture-installation", icon: "fixture", title: "Fixture installation",
+      body: "Faucets, toilets, showers, disposals and more — fitted neatly.",
+      detail: {
+        intro: "Whether you've chosen new fixtures or need advice, we fit them neatly and check everything works before we leave.",
+        included: ["Faucets and basins", "Toilets and showers", "Garbage disposals", "Fitting fixtures you've already bought"],
+      },
+      image: galleryBasin, imageAlt: "Newly fitted basin and tap",
+    },
+    {
+      slug: "pipe-repair", icon: "pipe", title: "Pipe repair",
+      body: "Fix damaged, corroded or noisy pipes and replace sections as needed.",
+      detail: {
+        intro: "From a single corroded joint to a run of old pipe, we repair or replace what's needed and explain the options.",
+        included: ["Repair of damaged or corroded sections", "Noisy pipe investigation", "Section replacement"],
+      },
+      image: galleryRadiator, imageAlt: "Radiator valve and pipe fitting",
+    },
+    {
+      slug: "emergency-plumbing", icon: "urgent", title: "Emergency plumbing",
+      body: "Burst pipe or major leak? Call us and we'll tell you how soon we can help.",
+      detail: {
+        intro: "If water is escaping, shut off the main valve first. Then call — we'll tell you honestly how soon we can get to you.",
+        included: ["Burst and leaking pipes", "Major fixture failures", "Making the situation safe, then planning the repair"],
+      },
+      faqs: [{ q: "What should I do while I wait?", a: "Shut off the main water valve, switch off the water heater if nearby, and move valuables away from the water." }],
+    },
   ],
   steps: [
     { title: "Tell us what's happening", body: "Call or send a message with a short description and, if you can, a photo." },
@@ -124,7 +199,6 @@ const northline: BusinessConfig = {
   ],
   footer: {
     tagline: "Sample plumbing brand for template demonstration only.",
-    hours: "Mon–Fri · 8:00–17:00 (sample hours)",
     socials: [
       { label: "Facebook", href: "https://facebook.com" },
       { label: "Instagram", href: "https://instagram.com" },
@@ -160,4 +234,8 @@ export const defaultBusiness = northline;
 
 export function getBusiness(slug: string): BusinessConfig | undefined {
   return businesses.find((b) => b.slug === slug);
+}
+
+export function getService(b: BusinessConfig, serviceSlug: string): Service | undefined {
+  return b.services.find((s) => s.slug === serviceSlug);
 }
