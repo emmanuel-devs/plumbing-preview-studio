@@ -228,7 +228,84 @@ const harborview: BusinessConfig = {
   serviceAreas: ["Port Ellis", "Bayside", "North Pier", "Gull Point", "Fairhaven"],
 };
 
-export const businesses: BusinessConfig[] = [northline, harborview];
+/** Prospect preview for Don's Electric Plumbing & HVAC. Only publicly verified details are used. */
+const donsElectric: BusinessConfig = {
+  ...northline,
+  slug: "dons-electric-plumbing-hvac",
+  name: "Don's Electric Plumbing & HVAC",
+  wordmark: { primary: "Don's Electric", accent: "Plumbing & HVAC" },
+  phone: "(251) 727-0174",
+  phoneHref: "+12517270174",
+  email: "donselectplumbhvac@gmail.com",
+  address: "Brewton, Alabama",
+  city: "Brewton",
+  isSample: false,
+  hours: undefined,
+  facts: undefined,
+  form: undefined,
+  seo: {
+    title: "Don's Electric Plumbing & HVAC | Brewton, Alabama",
+    description: "Explore plumbing, electrical and HVAC services from Don's Electric Plumbing & HVAC in Brewton, Alabama. Contact the team to discuss your project.",
+  },
+  hero: {
+    ...northline.hero,
+    eyebrow: "Plumbing · Electrical · HVAC · Brewton, Alabama",
+    headline: "A local team for your",
+    headlineAccent: "home systems",
+    subcopy: "Looking for plumbing, electrical or HVAC help? Get in touch with Don's Electric Plumbing & HVAC to discuss what you need.",
+    trustCues: ["Plumbing", "Electrical", "HVAC"],
+  },
+  cta: { quote: "Contact the team", call: "Call now" },
+  highlights: [
+    "Plumbing services",
+    "Electrical services",
+    "Heating and cooling",
+    "Contact the team to discuss your needs",
+  ],
+  about: {
+    ...northline.about,
+    heading: "Plumbing, electrical and HVAC",
+    body: "Don's Electric Plumbing & HVAC serves the Brewton, Alabama area. Contact the team directly to discuss your project and confirm the services available for your needs.",
+  },
+  services: [
+    {
+      slug: "plumbing",
+      icon: "pipe",
+      title: "Plumbing",
+      body: "Contact the team to discuss your plumbing needs and the work you're looking to have done.",
+    },
+    {
+      slug: "electrical",
+      icon: "fixture",
+      title: "Electrical",
+      body: "Get in touch to discuss your electrical project and confirm how the team can help.",
+    },
+    {
+      slug: "heating-cooling",
+      icon: "heater",
+      title: "Heating & cooling",
+      body: "Contact the team about your heating and cooling needs.",
+    },
+  ],
+  steps: [
+    { title: "Get in touch", body: "Call or email the team and explain what you need help with." },
+    { title: "Discuss your project", body: "Share the details so the team can confirm the next steps." },
+    { title: "Arrange the work", body: "Speak directly with the team about scheduling and the work required." },
+  ],
+  gallery: [],
+  serviceAreas: [],
+  faqs: [
+    { q: "How can I contact Don's Electric Plumbing & HVAC?", a: "Call (251) 727-0174 or email donselectplumbhvac@gmail.com." },
+    { q: "What services can I ask about?", a: "The business identifies plumbing, electrical and HVAC among its services. Contact the team to confirm the specific work available." },
+    { q: "Where is the business based?", a: "The business's public Facebook page lists Brewton, Alabama. Contact the team to confirm service availability for your location." },
+  ],
+  footer: {
+    tagline: "Plumbing · Electrical · HVAC in Brewton, Alabama",
+    socials: [{ label: "Facebook", href: "https://www.facebook.com/donselectricplumbinghvac/" }],
+  },
+};
+
+export const businesses: BusinessConfig[] = [northline, harborview, donsElectric];
 
 export const defaultBusiness = northline;
 
